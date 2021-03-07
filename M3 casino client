@@ -1,0 +1,59 @@
+// FUNCTION 
+// input is an array of playing card values
+  // each array element is an object
+  // each object value is either number 1-10, or face/ace
+  // can ignore object key names???
+  // hilo system:
+    // 2-6 = 1 point
+    // 7,8,9 = 0 point
+    // 10, face, ace = -1 point 
+// PLAN:
+  // fix the conditional tree, it doesn't have a conditional for 7,8,9, as those are zeros?
+  // console.log to see where it's looping into; is the naming/assignment accurate in the function? Likely this is where the problem is 
+// CHANGES:
+  // within if and else if, remove ".card + i"
+    // still not working, don't understand their system, will just re-do at the for loop level
+function cardCounter(array) {
+  var count = 0;
+  // make an array of values for original loop 
+  var values = [];
+  for (var j = 0; j < array.length; j++) {
+    for (var key in array[j]) {
+      values.push(array[j][key]);
+      // console.log(values);
+    }
+  }
+  for (var i = 0; i < values.length; i++) {
+    if (values[i] >= 2 && values[i] <= 6) {
+      console.log('2-6');
+      count++;
+    } else if (values[i] >= 10 || values[i] === 'face or ace') {
+      console.log('face or ace or 10');
+      count--;
+    }
+  }
+  return count;
+}
+
+// ASSERTION
+// function assertEquals(actual, expected, testDescription) {
+//   if (actual !== expected) {
+//     console.log('Test failed:', testDescription);
+//     return;
+//   }
+//   console.log('test passed');
+//   return;
+// }
+
+// TEST CASES 
+var dealtCards = [ { 'card 0': 2 }, { 'card 1': 6 }, { 'card 2': 8 }, { 'card 3': 'face or ace' } ];
+cardCounter(dealtCards);
+// var actual = cardCounter(dealtCards);
+// var expected = 1;
+// assertEquals(actual, expected, 'function should return correct HiLo count.');
+
+// var dealtCards2 = [ { 'card 0': 'face or ace' }, { 'card 1': 9 }, { 'card 2': 8 }, { 'card 3': 'face or ace' } ];
+
+// var actual2 = cardCounter(dealtCards2);
+// var expected2 = -2;
+// assertEquals(actual2, expected2, 'function should return correct HiLo count.');
