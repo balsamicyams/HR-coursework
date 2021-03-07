@@ -49,14 +49,16 @@ function detectOutlierValue (str) {
     // when found, new var equals that number, plus one
   var output = 1;
   for (var k = 0; k < numArr.length; k++) {
-    if (isEven && numArr[k] % 2 === 0) {
-
-    } else if (!isEven && numArr[k] % 2 === 1) {
-
+    if (isEven && numArr[k] % 2 === 1) {
+      output += numArr[k];
+    } else if (!isEven && numArr[k] % 2 === 0) {
+      output += numArr[k];
+    } else {
+      continue;
     }
   }
   // return our index var
-  // return output; 
+  return output; 
 }
 
 // ASSERTION
