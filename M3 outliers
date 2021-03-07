@@ -61,7 +61,9 @@ function detectOutlierValue (str) {
   return output; 
 }
 
-// ASSERTION
-
 // TEST CASES
-detectOutlierValue('2 2 3 2 2');
+// detectOutlierValue('127 999 3 500 1234567');
+// detectOutlierValue('4 6 8 12 1 20 60');
+// detectOutlierValue('0 0 3 20 2 8');
+// detectOutlierValue('3 3 3 4 3 3 3');
+detectOutlierValue('2 20 2000 300001 22');
