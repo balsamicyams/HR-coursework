@@ -1,0 +1,65 @@
+// START TIME = 4:15PM
+
+// Given a string of even and odd numbers, find which is the sole even number or the sole odd number.
+
+// The return value should be 1-indexed, not 0-indexed.
+
+// Examples :
+// detectOutlierValue("2 4 7 8 10"); // => 3 - Third number is odd, while the rest of the numbers are even
+// detectOutlierValue("1 10 1 1");  //=> 2 - Second number is even, while the rest of the numbers are odd
+
+// FUNCTION
+// we are given a string of numbers
+// output will be the index value (1 not 0 index) of the sole even or odd number 
+  // to be able to analyze input, will need to convert to numbers
+  // output will also be a number, not a string
+  
+  // need to determine if it's evens or odds
+  // need to find the outlier given this above info
+  // need to add one to the index since index is usually 0 first
+
+function detectOutlierValue (str) {
+  // make an array of numbers, converted from string
+    // use string split with spaces ' '
+    // push values into array, as numbers, using Number()
+  var numArr = str.split(' ');
+  for (var i = 0; i < numArr.length; i++) {
+    numArr[i] = Number(numArr[i]);
+  }
+  // determine if mostly odd or even
+    // declare external vars, one odd, one even, both set to 0
+    // for loop through array
+    // use conditional tree to see if "threshold" is broken, using modulo %
+    // if one of the vars passes 1, then a third var changes (can do as "isEven" and it becomes false if threshold for odd is broken)
+    // use the "isEven" var to guide the next phase
+  var isEven = true;
+  var odd = 0;
+  var even = 0;
+  for (var j = 0; j < numArr.length; j++) {
+    if (numArr[j] % 2 === 0) {
+      even++;
+    } else {
+      odd++
+    }
+    isEven = (odd < 2);
+  }
+  // given that we know odd or even mostly, can iterate through num array again, and find outlier index
+    // create new var for our index
+    // use conditional tree with modulo to find your var index, based on "isEven"
+    // when found, new var equals that number, plus one
+  var output = 1;
+  for (var k = 0; k < numArr.length; k++) {
+    if (isEven && numArr[k] % 2 === 0) {
+
+    } else if (!isEven && numArr[k] % 2 === 1) {
+
+    }
+  }
+  // return our index var
+  // return output; 
+}
+
+// ASSERTION
+
+// TEST CASES
+detectOutlierValue('2 2 3 2 2');
