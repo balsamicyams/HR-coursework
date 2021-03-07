@@ -1,0 +1,75 @@
+// You will be given an array that contains two strings. Your job is to create a function that will take those two strings and transpose them, so that the strings go from top to bottom instead of left to right.
+
+// e.g. transposeTwoStrings(['Hello','World']);
+
+// should return:
+// H W  
+// e o  
+// l r  
+// l l  
+// o d
+
+// FUNKTION
+// input is an array of two strings
+  // input: array
+// output is two side by side vertical strings 
+  // output: string
+
+// need to consider length and if lengths are equal 
+  // can base length on output on which string in array is longer (use >= in case same length)
+// need to consider conversion:
+  // after we know the length, can create a new array
+  // new array will have inner arrays, two characters each
+  // then examine input, filling inner arrays from inputs, one at a time
+    // next level of conversion, from array of arrays, into a string var 
+    // can add together arrays and make it so each one is a new line
+function transposeTwoStrings (array) {
+  // use conditional to find length of longest string 
+  if (array[0].length >= array[1].length) {
+    var longest = array[0].length;
+  } else {
+    var longest = array[1].length; 
+  }
+  // create an array of arrays, with inners arrays equal to longest length 
+  var charArr = [];
+  for (var i = 0; i < longest; i++) {
+    var inner = [];
+    charArr.push(inner);
+  }
+  // iterate over array, filling inner arrays with characters 
+  // CONCERN: use input array length or charArr length to iterate?
+    // does not say if edge case for different lengths... so can use length of just one string 
+  for (var j = 0; j < array[0].length; j++) {
+    charArr[j].push(array[0].slice(j, j + 1), array[1].slice(j, j + 1));
+  }
+  // console.log(charArr);
+  // create a string var, filling it with array elements, adding new line after each 
+  var charStr = '';
+  for (k = 0; k < charArr.length; k++) {
+    if (k < charArr.length - 1) {
+      charStr += charArr[k][0] + ' ' + charArr[k][1] + '\n';
+    } else {
+      charStr += charArr[k][0] + ' ' + charArr[k][1];
+    }
+  }
+  // return our string var 
+  return charStr;
+}
+
+// ASSERT
+function assertEqual (actual, expected, testName) {
+  if (actual === expected) {
+    console.log('passed');
+  } else {
+    console.log('FAILED [' + testName + '] supposed to get "' + expected + '" but got "' + actual + '" instead');
+  }
+}
+
+// TEST CASES
+// passing 
+var expected1 = 'H W\n' + 'e o\n' + 'l r\n' + 'l l\n' + 'o d';
+assertEqual (transposeTwoStrings(['Hello','World']), expected1, 'take an array of two strings and display vertically side by side');
+
+// // failing uneven lengths 
+var expected1 = 'H W\n' + 'e o\n' + 'l r\n' + 'l l\n' + 'o d\n' + '  s';
+assertEqual (transposeTwoStrings(['Hello','Worlds']), expected1, 'take an array of two strings and display vertically side by side');
