@@ -38,20 +38,24 @@ function isRotated (str1, str2) {
         // will need to use a 'break' in the second loop so that it ends on true once found, otherwise it could find a non-match and set to false, so needs to be if, else if, and else (continue)
   var strArr1 = str1.split('');
   var strArr2 = str2.split('');
-  for (var i = 0; i < strArr1.length; i++) {
-    for (var j = 0; j < strArr2.length; j++) {
-      if (strArr1[i] === strArr2[j]) {
-        match = true;
+  strArr1 = strArr1.concat(strArr1);
+  var count = 0;
+  for (var i = 0; i < strArr2.length; i++) {
+    for (var j = 0; j < strArr1.length; j++) {
+      if (count === strArr2.length) {
         break;
-      } else if (strArr1[i] !== strArr2[j]) {
+      }
+      if (strArr2[i] !== strArr1[j]) {
         match = false;
-        continue;
+      } else if (strArr2[i] === strArr1[j]) {
+        match = true;
+        count++;
       } else {
         continue;
       }
     }
   }
-  strArr2 = strArr2.concat(strArr2);
+  // strArr2 = strArr2.concat(strArr2);
   // console.log(match);
   // console.log(strArr1);
   // console.log(strArr2);
@@ -65,11 +69,11 @@ function isRotated (str1, str2) {
     // *** here will need to be creative with 2nd for loop parameters... need to be able to go 'back to the beginning' (up to but not including) where the first array starts (same char)
       // *** use hint, can't be done without doubling the 2nd array, still need to end somehow
       // this can be done by for (var j = strArr2.indexOf(strArr1[0]); j < (strArr2.length / 2); j++)
-  for (var i = 0; i < strArr1.length; i++) {
-    for (var j = strArr2.indexOf(strArr1[0]); j < ((strArr2.length / 2) + strArr2.indexOf(strArr1[0])); j++) {
-      match = (strArr1[i] === strArr2[j]);
-    }
-  }
+  // for (var i = 0; i < strArr1.length; i++) {
+  //   for (var j = strArr2.indexOf(strArr1[0]); j < ((strArr2.length / 2) + strArr2.indexOf(strArr1[0])); j++) {
+  //     match = (strArr1[i] === strArr2[j]);
+  //   }
+  // }
   // return boolean for match y/n 
   return match;
 } 
@@ -87,3 +91,6 @@ var string1 = 'hello world';
 var string2 = 'orldhello w';
 assertEqual(isRotated(string1, string2), true, 'compare two strings to check for equal but rotated');
 
+var string3 = 'how many chucks?';
+var string4 = 'many chucks?how ';
+assertEqual(isRotated(string3, string4), true, 'compare two strings to check for equal but rotated');
