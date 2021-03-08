@@ -53,8 +53,8 @@ function isRotated (str1, str2) {
   }
   strArr2 = strArr2.concat(strArr2);
   // console.log(match);
-  console.log(strArr1);
-  console.log(strArr2);
+  // console.log(strArr1);
+  // console.log(strArr2);
   // console.log(strArr2.indexOf(strArr1[0]));
   // if first two true, then make sure all the matches are in sequence...
     // this aspect will NOT be dealt with by above 'cond chars'; could have same chars, diff order
@@ -85,4 +85,5 @@ function assertEqual(actual, expected, testName) {
 // TEST CASES
 var string1 = 'hello world';
 var string2 = 'orldhello w';
-assertEqual(isRotated(string1, string2);
+assertEqual(isRotated(string1, string2), true, 'compare two strings to check for equal but rotated');
+
