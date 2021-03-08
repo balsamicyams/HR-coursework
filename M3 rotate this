@@ -1,0 +1,88 @@
+// Is one string a rotated version of another?
+
+// For example:
+// String 1: 'hello world'
+// String 2: 'orldhello w'
+
+// Extra hint: (click the drop down to ROT7 to see hint)
+// If you double the string, you'll be to trivially find another string inside it using regular String methods.
+
+// Doubled string: 'hello worldhello world'
+// Search w/in it: '       orldhello w    '
+
+// for this one I would ask the proctor, what exactly do you mean by rotated? I am guessing, by the example, that by 'rotate' they mean same overall sequence or order, as in one specific char follows/leads another specific, but you've changed where you are in the sequence, to start/end
+
+// FUNCTION
+  // input is two strings
+  // output is yes/no for if one string is rotated version of the other 
+    // do we know what 'rotate' means?
+    // i think so: same sequence but new start point
+      // what are we looking for?
+      // same number of chars
+      // same chars in each, but start/end different
+        // how to check this?
+        // ONE: compare lengths of each
+        // TWO: compare characters of each
+        // THREE: tricky part will be to compare the sequence...
+          // if first two are a yes, then we could alter comparison to start at first shared char
+
+function isRotated (str1, str2) {
+  // cond lengths
+  var match = (str1.length === str2.length);
+  // cond chars:
+    // boolean var for match, set to true
+    // create arrays of each
+    // loop through both looking for matches; for loop in a for loop
+      // if strings in array match, boolean var (is true, if not it'll set to false)
+      // this should work, as each char in the 1st str will loop through entire 2nd str, and if they do have the same chars, it'll set the boolean to true for each one 
+        // will need to use a 'break' in the second loop so that it ends on true once found, otherwise it could find a non-match and set to false, so needs to be if, else if, and else (continue)
+  var strArr1 = str1.split('');
+  var strArr2 = str2.split('');
+  for (var i = 0; i < strArr1.length; i++) {
+    for (var j = 0; j < strArr2.length; j++) {
+      if (strArr1[i] === strArr2[j]) {
+        match = true;
+        break;
+      } else if (strArr1[i] !== strArr2[j]) {
+        match = false;
+        continue;
+      } else {
+        continue;
+      }
+    }
+  }
+  strArr2 = strArr2.concat(strArr2);
+  // console.log(match);
+  console.log(strArr1);
+  console.log(strArr2);
+  // console.log(strArr2.indexOf(strArr1[0]));
+  // if first two true, then make sure all the matches are in sequence...
+    // this aspect will NOT be dealt with by above 'cond chars'; could have same chars, diff order
+    // do another for loop in for loop through the arrays 
+    // set to start at a match, using array declaration/naming
+    // another (or the same?) boolean as above... can be the same 
+    // if, starting at a match, each comparison matches, stay true, else set to false for return val
+    // *** here will need to be creative with 2nd for loop parameters... need to be able to go 'back to the beginning' (up to but not including) where the first array starts (same char)
+      // *** use hint, can't be done without doubling the 2nd array, still need to end somehow
+      // this can be done by for (var j = strArr2.indexOf(strArr1[0]); j < (strArr2.length / 2); j++)
+  for (var i = 0; i < strArr1.length; i++) {
+    for (var j = strArr2.indexOf(strArr1[0]); j < ((strArr2.length / 2) + strArr2.indexOf(strArr1[0])); j++) {
+      match = (strArr1[i] === strArr2[j]);
+    }
+  }
+  // return boolean for match y/n 
+  return match;
+} 
+
+// ASSERTION
+function assertEqual(actual, expected, testName) {
+  if (actual === expected) {
+    console.log('passed');
+  } else {
+    console.log('failed ' + testName);
+  }
+}
+// TEST CASES
+var string1 = 'hello world';
+var string2 = 'orldhello w';
+assertEqual(isRotated(string1, string2);
