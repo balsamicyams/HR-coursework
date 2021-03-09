@@ -1,0 +1,84 @@
+// Binary search is a technique for very rapidly searching a sorted collection by cutting the search space in half at every pass.
+
+// Given a sorted array, such as this:
+// [1, 3, 16, 22, 31, 33, 34]
+
+// You can search for the value 31, as follows:
+
+// 1) Pick the midpoint: 22.
+// 2) The value is higher than 22, so now consider only the right half of the previous array:
+// [...31, 33, 34]
+// 3) Pick the midpoint: 33
+// 4) The value is lower than 33, so now consider only the left half of the previous array:
+// [...31...]
+// 5) Pick the midpoint: 31
+// 6) You've hit the value.
+// 7) Return the index of the value.
+
+// Notes:
+// * If you don't find the value, you can return null.
+// * If at any point you calculate the index of the midpoint and get a fractional number, just round it down ("floor" it).
+
+// My Notes:
+  // midpoint
+  // desired number 
+  // is array sorted 
+    // inputs are an array (sorted?) and number
+    // function will try to "guess" that number
+    // computer is going to tell us the guessing process
+    // function will be responding itself hi/lo 
+    // output is input number index in array 
+
+// FUNCTION 
+function findIndex (arr, n) {
+// input is an array and a number (not using indexOf)
+  // declare index var = null 
+  // find midpoint 
+    // midpoint = length of array / 2 *** use rounded number (eg Math.floor())
+  // is midpoint our number
+    // declare 1st 2 for loop params:
+      // iStart = 0
+      // iEnd = arr.length
+    // for loop through the array 
+    // if statement to check equality bw midpoint value and n
+  // if yes, index = midpoint
+    // break out of loop
+  // if no, are we too high or too low?
+    // based on high/low, *** to account for making search field smaller
+      // if high/low, we can use either:
+        // high: iEnd = midpoint, low: iStart = midpoint
+  var index = null;
+  var midpoint = Math.floor(arr.length / 2);
+  if (arr[midpoint] === n) {
+    return midpoint;
+  } else {
+    var iStart = 0;
+    var iEnd = arr.length;
+    for (var i = iStart; i < iEnd; i++) {
+      // var counter = 
+      if (arr[midpoint] === n) {
+        return midpoint;
+      } else if (arr[midpoint] > n) {
+        iEnd = midpoint;
+        midpoint = Math.floor((midpoint - iStart)) / 2; 
+      } else {
+        iStart = midpoint;
+        midpoint = Math.floor((iEnd - midpoint)) / 2;
+      }
+    }
+  }
+
+// output is index of number in array
+  // return index
+
+}
+
+// ASSERTION
+function assertEqual (actual, expected, testName) {
+  // in this case we're looking for the correct index
+}
+
+// TEST CASES
+var testArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+var testN = 3;
+findIndex(testArr, testN);
